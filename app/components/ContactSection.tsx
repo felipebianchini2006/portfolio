@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { SectionTitle } from './SectionTitle';
 import { siteConfig } from '@/lib/site.config';
+import { Box, Container, Card, CardContent, Typography } from '@mui/material';
 import EmailIcon from '@mui/icons-material/Email';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -15,102 +16,230 @@ export function ContactSection() {
       label: 'Email',
       value: siteConfig.email,
       href: `mailto:${siteConfig.email}`,
-      bgColor: 'from-red-500 to-pink-500',
-      iconColor: 'text-red-500',
+      bgGradient: 'linear-gradient(135deg, #ef4444 0%, #ec4899 100%)',
+      iconColor: '#ef4444',
     },
     {
       icon: WhatsAppIcon,
       label: 'WhatsApp',
       value: siteConfig.phone,
       href: `https://wa.me/${siteConfig.whatsapp}`,
-      bgColor: 'from-green-500 to-emerald-500',
-      iconColor: 'text-green-500',
+      bgGradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+      iconColor: '#10b981',
     },
     {
       icon: GitHubIcon,
       label: 'GitHub',
       value: '@felipebianchini2006',
       href: siteConfig.github,
-      bgColor: 'from-gray-700 to-gray-900',
-      iconColor: 'text-gray-700 dark:text-gray-400',
+      bgGradient: 'linear-gradient(135deg, #374151 0%, #111827 100%)',
+      iconColor: '#374151',
     },
     {
       icon: LinkedInIcon,
       label: 'LinkedIn',
       value: 'Felipe Pacheco Bianchini',
       href: siteConfig.linkedin,
-      bgColor: 'from-blue-600 to-blue-700',
-      iconColor: 'text-blue-600',
+      bgGradient: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
+      iconColor: '#2563eb',
     },
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-b from-background to-accent/30" id="contact">
-      <div className="container mx-auto px-4">
+    <Box
+      component="section"
+      id="contact"
+      sx={{
+        py: 12,
+        background: 'linear-gradient(180deg, rgba(37, 99, 235, 0.02) 0%, rgba(37, 99, 235, 0.08) 100%)',
+      }}
+    >
+      <Container maxWidth="lg">
         <SectionTitle
           title="Vamos Conversar?"
           subtitle="Entre em contato comigo através de qualquer uma das plataformas abaixo"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: {
+              xs: '1fr',
+              sm: 'repeat(2, 1fr)',
+              lg: 'repeat(4, 1fr)',
+            },
+            gap: 4,
+            maxWidth: '1400px',
+            mx: 'auto',
+          }}
+        >
           {contactMethods.map((method, index) => {
             const Icon = method.icon;
             return (
-              <motion.a
+              <motion.div
                 key={method.label}
-                href={method.href}
-                target="_blank"
-                rel="noopener noreferrer"
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="group relative bg-white dark:bg-accent rounded-2xl p-8 transition-all duration-300 hover:-translate-y-3 [box-shadow:var(--elevation-2)] hover:[box-shadow:var(--elevation-16)]"
               >
-                {/* Hover gradient background */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${method.bgColor} opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl`} />
+                <Card
+                  component="a"
+                  href={method.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  elevation={2}
+                  sx={{
+                    position: 'relative',
+                    borderRadius: 4,
+                    overflow: 'hidden',
+                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    textDecoration: 'none',
+                    height: '100%',
+                    '&:hover': {
+                      transform: 'translateY(-12px)',
+                      boxShadow: 16,
+                      '& .hover-bg': {
+                        opacity: 1,
+                      },
+                      '& .icon-box': {
+                        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                      },
+                      '& .MuiSvgIcon-root': {
+                        color: 'white',
+                      },
+                      '& .MuiTypography-root': {
+                        color: 'white',
+                      },
+                      '& .value-text': {
+                        color: 'rgba(255, 255, 255, 0.9)',
+                      },
+                    },
+                  }}
+                >
+                  {/* Hover gradient background */}
+                  <Box
+                    className="hover-bg"
+                    sx={{
+                      position: 'absolute',
+                      inset: 0,
+                      background: method.bgGradient,
+                      opacity: 0,
+                      transition: 'opacity 0.3s ease',
+                      zIndex: 0,
+                    }}
+                  />
 
-                {/* Content */}
-                <div className="relative flex flex-col items-center text-center gap-6">
-                  <div
-                    className="p-5 rounded-2xl bg-accent group-hover:bg-white/20 transition-all duration-300 [box-shadow:var(--elevation-4)]"
+                  {/* Content */}
+                  <CardContent
+                    sx={{
+                      position: 'relative',
+                      zIndex: 1,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      textAlign: 'center',
+                      gap: 3,
+                      p: 4,
+                    }}
                   >
-                    <Icon className={`text-5xl ${method.iconColor} group-hover:text-white transition-colors`} />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-foreground group-hover:text-white mb-2 transition-colors">
-                      {method.label}
-                    </h3>
-                    <p className="text-sm text-secondary group-hover:text-white/90 break-all transition-colors font-medium">
-                      {method.value}
-                    </p>
-                  </div>
-                </div>
-              </motion.a>
+                    <Box
+                      className="icon-box"
+                      sx={{
+                        p: 2.5,
+                        borderRadius: 3,
+                        backgroundColor: 'action.hover',
+                        transition: 'all 0.3s ease',
+                        boxShadow: 3,
+                      }}
+                    >
+                      <Icon
+                        sx={{
+                          fontSize: '3rem',
+                          color: method.iconColor,
+                          transition: 'color 0.3s ease',
+                        }}
+                      />
+                    </Box>
+                    <Box>
+                      <Typography
+                        variant="h6"
+                        sx={{
+                          fontWeight: 700,
+                          color: 'text.primary',
+                          mb: 1,
+                          transition: 'color 0.3s ease',
+                        }}
+                      >
+                        {method.label}
+                      </Typography>
+                      <Typography
+                        className="value-text"
+                        variant="body2"
+                        sx={{
+                          color: 'text.secondary',
+                          fontWeight: 500,
+                          wordBreak: 'break-all',
+                          transition: 'color 0.3s ease',
+                        }}
+                      >
+                        {method.value}
+                      </Typography>
+                    </Box>
+                  </CardContent>
+                </Card>
+              </motion.div>
             );
           })}
-        </div>
+        </Box>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
         >
-          <div
-            className="max-w-3xl mx-auto bg-white dark:bg-accent rounded-2xl p-8 [box-shadow:var(--elevation-2)]"
+          <Card
+            elevation={2}
+            sx={{
+              maxWidth: '900px',
+              mx: 'auto',
+              mt: 8,
+              borderRadius: 4,
+              textAlign: 'center',
+            }}
           >
-            <p className="text-lg text-foreground leading-relaxed mb-4">
-              <span className="font-bold text-primary">Estou sempre aberto</span> a discutir novos projetos,
-              ideias criativas ou oportunidades para fazer parte da sua visão.
-            </p>
-            <p className="text-base text-secondary">
-              Fique à vontade para entrar em contato através de qualquer uma das plataformas acima!
-            </p>
-          </div>
+            <CardContent sx={{ p: 4 }}>
+              <Typography
+                variant="h6"
+                sx={{
+                  color: 'text.primary',
+                  lineHeight: 1.7,
+                  mb: 2,
+                }}
+              >
+                <Box
+                  component="span"
+                  sx={{ fontWeight: 700, color: 'primary.main' }}
+                >
+                  Estou sempre aberto
+                </Box>{' '}
+                a discutir novos projetos, ideias criativas ou oportunidades para fazer parte da
+                sua visão.
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: 'text.secondary',
+                }}
+              >
+                Fique à vontade para entrar em contato através de qualquer uma das plataformas
+                acima!
+              </Typography>
+            </CardContent>
+          </Card>
         </motion.div>
-      </div>
-    </section>
+      </Container>
+    </Box>
   );
 }

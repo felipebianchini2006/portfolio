@@ -1,3 +1,4 @@
+import { Chip, Box } from '@mui/material';
 import CodeIcon from '@mui/icons-material/Code';
 import DataObjectIcon from '@mui/icons-material/DataObject';
 import StorageIcon from '@mui/icons-material/Storage';
@@ -12,54 +13,94 @@ interface SkillBadgeProps {
 }
 
 const getIconForSkill = (name: string, category?: string) => {
-  const iconClass = "text-lg";
+  const iconProps = { sx: { fontSize: '1.125rem' } };
 
   // Backend & DevOps
   if (['Docker', 'AWS', 'Azure DevOps', 'Git', 'GitHub'].includes(name)) {
-    return <CloudIcon className={iconClass} />;
+    return <CloudIcon {...iconProps} />;
   }
 
   // Databases
   if (name.includes('SQL') || name.includes('Database')) {
-    return <StorageIcon className={iconClass} />;
+    return <StorageIcon {...iconProps} />;
   }
 
   // Architecture
   if (category === 'architecture' || ['DDD', 'MVC', 'Clean Architecture', 'Microserviços'].includes(name)) {
-    return <DataObjectIcon className={iconClass} />;
+    return <DataObjectIcon {...iconProps} />;
   }
 
   // Terminal/CLI tools
   if (['Go', 'Ruby', 'PHP'].includes(name)) {
-    return <TerminalIcon className={iconClass} />;
+    return <TerminalIcon {...iconProps} />;
   }
 
   // Default code icon
-  return <CodeIcon className={iconClass} />;
+  return <CodeIcon {...iconProps} />;
 };
 
 export function SkillBadge({ name, years, variant = 'primary', category }: SkillBadgeProps) {
   return (
-    <div
-      className={`
-        group inline-flex items-center gap-3 px-6 py-3.5 rounded-xl font-medium text-sm md:text-base
-        transition-all duration-300 hover:scale-110 hover:-translate-y-1 cursor-default
-        [box-shadow:var(--elevation-2)] hover:[box-shadow:var(--elevation-8)]
-        ${variant === 'primary'
-          ? 'bg-gradient-to-r from-primary/15 to-primary/10 text-primary hover:shadow-primary/20'
-          : 'bg-white dark:bg-accent text-foreground'
-        }
-      `}
-    >
-      <span className="group-hover:scale-125 transition-transform">
-        {getIconForSkill(name, category)}
-      </span>
-      <span className="font-semibold">{name}</span>
-      {years && (
-        <span className="text-xs font-medium text-secondary bg-background/50 px-2.5 py-1 rounded-full">
-          {years}
-        </span>
-      )}
-    </div>
+    <Chip
+      icon={getIconForSkill(name, category)}
+      label={
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Box component="span" sx={{ fontWeight: 600 }}>
+            {name}
+          </Box>
+          {years && (
+            <Box
+              component="span"
+              sx={{
+                fontSize: '0.75rem',
+                fontWeight: 500,
+                color: 'text.secondary',
+                backgroundColor: 'background.default',
+                px: 1.25,
+                py: 0.5,
+                borderRadius: 999,
+                opacity: 0.8,
+              }}
+            >
+              {years}
+            </Box>
+          )}
+        </Box>
+      }
+      sx={{
+        px: 2,
+        py: 3,
+        fontSize: { xs: '0.875rem', md: '1rem' },
+        fontWeight: 500,
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        cursor: 'default',
+        ...(variant === 'primary'
+          ? {
+              background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(37, 99, 235, 0.1) 100%)',
+              color: 'primary.main',
+              '&:hover': {
+                background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(37, 99, 235, 0.15) 100%)',
+                transform: 'scale(1.1) translateY(-4px)',
+                boxShadow: 4,
+              },
+            }
+          : {
+              backgroundColor: 'background.paper',
+              color: 'text.primary',
+              '&:hover': {
+                backgroundColor: 'action.hover',
+                transform: 'scale(1.1) translateY(-4px)',
+                boxShadow: 4,
+              },
+            }),
+        '& .MuiChip-icon': {
+          color: 'inherit',
+          transition: 'transform 0.3s ease',
+        },
+        '&:hover .MuiChip-icon': {
+          transform: 'scale(1.25)',
+        },
+      }}
+    />
   );
 }

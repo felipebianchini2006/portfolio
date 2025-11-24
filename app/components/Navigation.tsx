@@ -4,6 +4,19 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Button,
+  Box,
+  Container,
+} from '@mui/material';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -12,20 +25,12 @@ import CodeIcon from '@mui/icons-material/Code';
 
 export function Navigation() {
   const [mounted, setMounted] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const pathname = usePathname();
 
   useEffect(() => {
     setMounted(true);
-
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const navLinks = [
@@ -41,116 +46,236 @@ export function Navigation() {
     return pathname === href;
   };
 
-  return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/90 dark:bg-background/90 backdrop-blur-xl'
-          : 'bg-transparent'
-      }`}
-      style={{
-        boxShadow: isScrolled ? 'var(--elevation-4)' : 'none',
-      }}
-    >
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
-          <Link
-            href="/"
-            className="group flex items-center gap-2 text-2xl font-extrabold"
-          >
-            <div className="p-2 rounded-xl bg-gradient-to-br from-primary to-primary-dark text-white group-hover:scale-110 transition-transform shadow-lg">
-              <CodeIcon className="text-2xl" />
-            </div>
-            <span className="bg-gradient-to-r from-primary to-primary-dark bg-clip-text text-transparent">
-              Felipe
-            </span>
-            <span className="text-foreground">.dev</span>
-          </Link>
+  const toggleDrawer = (open: boolean) => () => {
+    setIsMobileMenuOpen(open);
+  };
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`relative px-6 py-3 font-semibold rounded-xl transition-all ${
-                  isActive(link.href)
-                    ? 'text-white bg-gradient-to-r from-primary to-primary-dark'
-                    : 'text-foreground hover:bg-accent hover:text-primary'
-                }`}
-                style={{
-                  boxShadow: isActive(link.href) ? 'var(--elevation-4)' : 'none',
+  return (
+    <>
+      <AppBar
+        position="fixed"
+        elevation={0}
+        sx={{
+          backgroundColor: 'background.paper',
+          backdropFilter: 'blur(8px)',
+          borderBottom: '1px solid',
+          borderColor: 'divider',
+        }}
+      >
+        <Container maxWidth="lg">
+          <Toolbar
+            disableGutters
+            sx={{
+              minHeight: { xs: 56, sm: 64 },
+              display: 'flex',
+              justifyContent: 'space-between',
+              py: 1,
+            }}
+          >
+            {/* Logo */}
+            <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 0.5,
                 }}
               >
-                {link.label}
-                {isActive(link.href) && (
-                  <span className="absolute bottom-0 left-0 right-0 h-1 bg-white rounded-t-full" />
-                )}
-              </Link>
-            ))}
+                <Box
+                  sx={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: '50%',
+                    background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                  }}
+                >
+                  <CodeIcon sx={{ fontSize: '1.25rem' }} />
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 0.25 }}>
+                  <Box
+                    component="span"
+                    sx={{
+                      fontSize: '1.25rem',
+                      fontWeight: 700,
+                      color: 'text.primary',
+                      letterSpacing: '-0.01em',
+                    }}
+                  >
+                    Felipe
+                  </Box>
+                  <Box
+                    component="span"
+                    sx={{
+                      fontSize: '1.25rem',
+                      fontWeight: 400,
+                      color: 'text.secondary',
+                    }}
+                  >
+                    .dev
+                  </Box>
+                </Box>
+              </Box>
+            </Link>
 
-            {/* Theme Toggle */}
-            {mounted && (
-              <button
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                className="ml-4 p-3 rounded-xl bg-accent hover:bg-primary hover:text-white transition-all hover:scale-110"
-                style={{ boxShadow: 'var(--elevation-2)' }}
-                aria-label="Toggle theme"
-              >
-                {theme === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
-              </button>
-            )}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-3">
-            {mounted && (
-              <button
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                className="p-2.5 rounded-xl bg-accent hover:bg-primary hover:text-white transition-all"
-                style={{ boxShadow: 'var(--elevation-2)' }}
-                aria-label="Toggle theme"
-              >
-                {theme === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
-              </button>
-            )}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2.5 rounded-xl bg-accent hover:bg-primary hover:text-white transition-all"
-              style={{ boxShadow: 'var(--elevation-2)' }}
-              aria-label="Toggle menu"
-            >
-              {isMobileMenuOpen ? <CloseIcon className="text-2xl" /> : <MenuIcon className="text-2xl" />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden bg-white/95 dark:bg-background/95 backdrop-blur-xl" style={{ boxShadow: 'var(--elevation-8)' }}>
-            <div className="flex flex-col py-6 gap-4">
+            {/* Desktop Navigation */}
+            <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 0.5 }}>
               {navLinks.map((link) => (
-                <Link
+                <Button
                   key={link.href}
+                  component={Link}
                   href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`font-semibold px-6 py-3.5 rounded-xl transition-all ${
-                    isActive(link.href)
-                      ? 'text-white bg-gradient-to-r from-primary to-primary-dark'
-                      : 'text-foreground hover:bg-accent hover:text-primary'
-                  }`}
-                  style={{
-                    boxShadow: isActive(link.href) ? 'var(--elevation-4)' : 'none',
+                  sx={{
+                    px: 2,
+                    py: 1,
+                    fontSize: '0.875rem',
+                    fontWeight: 500,
+                    color: isActive(link.href) ? 'primary.main' : 'text.primary',
+                    textTransform: 'none',
+                    borderRadius: 2,
+                    minWidth: 'auto',
+                    '&:hover': {
+                      backgroundColor: 'action.hover',
+                      color: 'primary.main',
+                    },
+                    transition: 'all 0.2s ease',
                   }}
                 >
                   {link.label}
-                </Link>
+                </Button>
               ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </nav>
+
+              {/* Theme Toggle */}
+              {mounted && (
+                <IconButton
+                  onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                  size="small"
+                  sx={{
+                    ml: 1,
+                    color: 'text.secondary',
+                    '&:hover': {
+                      backgroundColor: 'action.hover',
+                      color: 'primary.main',
+                    },
+                  }}
+                  aria-label="Toggle theme"
+                >
+                  {theme === 'dark' ? (
+                    <LightModeIcon sx={{ fontSize: '1.25rem' }} />
+                  ) : (
+                    <DarkModeIcon sx={{ fontSize: '1.25rem' }} />
+                  )}
+                </IconButton>
+              )}
+            </Box>
+
+            {/* Mobile Menu Button */}
+            <Box sx={{ display: { xs: 'flex', md: 'none' }, alignItems: 'center', gap: 1 }}>
+              {mounted && (
+                <IconButton
+                  onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                  size="small"
+                  sx={{
+                    color: 'text.secondary',
+                    '&:hover': {
+                      backgroundColor: 'action.hover',
+                      color: 'primary.main',
+                    },
+                  }}
+                  aria-label="Toggle theme"
+                >
+                  {theme === 'dark' ? (
+                    <LightModeIcon sx={{ fontSize: '1.25rem' }} />
+                  ) : (
+                    <DarkModeIcon sx={{ fontSize: '1.25rem' }} />
+                  )}
+                </IconButton>
+              )}
+              <IconButton
+                onClick={toggleDrawer(true)}
+                size="small"
+                sx={{
+                  color: 'text.secondary',
+                  '&:hover': {
+                    backgroundColor: 'action.hover',
+                    color: 'primary.main',
+                  },
+                }}
+                aria-label="Toggle menu"
+              >
+                <MenuIcon sx={{ fontSize: '1.5rem' }} />
+              </IconButton>
+            </Box>
+          </Toolbar>
+        </Container>
+      </AppBar>
+
+      {/* Mobile Drawer */}
+      <Drawer
+        anchor="right"
+        open={isMobileMenuOpen}
+        onClose={toggleDrawer(false)}
+        PaperProps={{
+          sx: {
+            width: 280,
+            backgroundColor: 'background.paper',
+            backgroundImage: 'none',
+          },
+        }}
+      >
+        <Box sx={{ p: 2 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'flex-end', mb: 2 }}>
+            <IconButton
+              onClick={toggleDrawer(false)}
+              size="small"
+              sx={{
+                color: 'text.secondary',
+                '&:hover': {
+                  backgroundColor: 'action.hover',
+                  color: 'primary.main',
+                },
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+          </Box>
+          <List>
+            {navLinks.map((link) => (
+              <ListItem key={link.href} disablePadding sx={{ mb: 0.5 }}>
+                <ListItemButton
+                  component={Link}
+                  href={link.href}
+                  onClick={toggleDrawer(false)}
+                  sx={{
+                    borderRadius: 2,
+                    py: 1.5,
+                    color: isActive(link.href) ? 'primary.main' : 'text.primary',
+                    backgroundColor: isActive(link.href) ? 'action.selected' : 'transparent',
+                    '&:hover': {
+                      backgroundColor: 'action.hover',
+                      color: 'primary.main',
+                    },
+                  }}
+                >
+                  <ListItemText
+                    primary={link.label}
+                    primaryTypographyProps={{
+                      fontWeight: isActive(link.href) ? 600 : 500,
+                      fontSize: '0.875rem',
+                    }}
+                  />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+      </Drawer>
+
+      {/* Spacer to prevent content from going under AppBar */}
+      <Toolbar sx={{ minHeight: { xs: 56, sm: 64 } }} />
+    </>
   );
 }

@@ -1,6 +1,16 @@
 import Link from 'next/link';
 import { Project } from '@/lib/types';
 import { SkillBadge } from './SkillBadge';
+import {
+  Card,
+  CardContent,
+  CardActions,
+  Typography,
+  IconButton,
+  Button,
+  Box,
+  Chip,
+} from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
@@ -12,75 +22,171 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <div
-      className="group relative bg-white dark:bg-accent rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-3 [box-shadow:var(--elevation-2)] hover:[box-shadow:var(--elevation-16)]"
+    <Card
+      elevation={2}
+      sx={{
+        position: 'relative',
+        borderRadius: 4,
+        overflow: 'visible',
+        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        '&:hover': {
+          transform: 'translateY(-12px)',
+          boxShadow: 16,
+        },
+      }}
     >
       {/* Top accent bar */}
-      <div className="h-2 bg-gradient-to-r from-primary via-primary-light to-purple-500" />
+      <Box
+        sx={{
+          height: 8,
+          background: 'linear-gradient(90deg, #2563eb 0%, #60a5fa 50%, #a855f7 100%)',
+        }}
+      />
 
-      <div className="p-8">
+      <CardContent sx={{ p: 4 }}>
         {/* Header */}
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-primary/10 text-primary">
-              <FolderIcon className="text-2xl" />
-            </div>
-            <h3 className="text-2xl font-bold text-foreground group-hover:text-primary transition-colors">
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'flex-start',
+            justifyContent: 'space-between',
+            mb: 3,
+          }}
+        >
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flex: 1 }}>
+            <Box
+              sx={{
+                p: 1,
+                borderRadius: 2,
+                backgroundColor: 'primary.main',
+                color: 'white',
+                display: 'flex',
+                alignItems: 'center',
+                opacity: 0.9,
+              }}
+            >
+              <FolderIcon sx={{ fontSize: '1.75rem' }} />
+            </Box>
+            <Typography
+              variant="h5"
+              sx={{
+                fontWeight: 700,
+                color: 'text.primary',
+                transition: 'color 0.3s ease',
+                '.MuiCard-root:hover &': {
+                  color: 'primary.main',
+                },
+              }}
+            >
               {project.title}
-            </h3>
-          </div>
-          <div className="flex gap-3">
-            <a
+            </Typography>
+          </Box>
+
+          <Box sx={{ display: 'flex', gap: 1 }}>
+            <IconButton
+              component="a"
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-xl bg-background hover:bg-primary hover:text-white transition-all hover:scale-110"
-              style={{ boxShadow: 'var(--elevation-2)' }}
+              size="small"
+              sx={{
+                backgroundColor: 'background.default',
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  backgroundColor: 'primary.main',
+                  color: 'white',
+                  transform: 'scale(1.1)',
+                },
+              }}
               aria-label="View on GitHub"
             >
-              <GitHubIcon className="text-xl" />
-            </a>
+              <GitHubIcon fontSize="small" />
+            </IconButton>
             {project.demo && (
-              <a
+              <IconButton
+                component="a"
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-xl bg-background hover:bg-primary hover:text-white transition-all hover:scale-110"
-                style={{ boxShadow: 'var(--elevation-2)' }}
+                size="small"
+                sx={{
+                  backgroundColor: 'background.default',
+                  transition: 'all 0.3s ease',
+                  '&:hover': {
+                    backgroundColor: 'primary.main',
+                    color: 'white',
+                    transform: 'scale(1.1)',
+                  },
+                }}
                 aria-label="View demo"
               >
-                <OpenInNewIcon className="text-xl" />
-              </a>
+                <OpenInNewIcon fontSize="small" />
+              </IconButton>
             )}
-          </div>
-        </div>
+          </Box>
+        </Box>
 
         {/* Description */}
-        <p className="text-secondary text-base leading-relaxed mb-8 min-h-[3rem]">
+        <Typography
+          variant="body1"
+          sx={{
+            color: 'text.secondary',
+            lineHeight: 1.7,
+            mb: 4,
+            minHeight: '3rem',
+          }}
+        >
           {project.description}
-        </p>
+        </Typography>
 
         {/* Technologies */}
-        <div className="flex flex-wrap gap-3 mb-6">
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, mb: 3 }}>
           {project.technologies.slice(0, 4).map((tech) => (
             <SkillBadge key={tech} name={tech} variant="secondary" />
           ))}
           {project.technologies.length > 4 && (
-            <span className="text-xs font-medium text-secondary bg-accent px-3 py-1.5 rounded-full" style={{ boxShadow: 'var(--elevation-1)' }}>
-              +{project.technologies.length - 4} mais
-            </span>
+            <Chip
+              label={`+${project.technologies.length - 4} mais`}
+              size="small"
+              sx={{
+                fontSize: '0.75rem',
+                fontWeight: 500,
+                backgroundColor: 'action.hover',
+                color: 'text.secondary',
+              }}
+            />
           )}
-        </div>
+        </Box>
+      </CardContent>
 
-        {/* Call to action */}
-        <Link
+      <CardActions sx={{ px: 4, pb: 4, pt: 0 }}>
+        <Button
+          component={Link}
           href={`/projects/${project.slug}`}
-          className="group/link inline-flex items-center gap-2 px-6 py-3 bg-primary/10 text-primary rounded-xl font-semibold hover:bg-primary hover:text-white transition-all [box-shadow:var(--elevation-2)] hover:[box-shadow:var(--elevation-4)]"
+          variant="contained"
+          endIcon={<ArrowForwardIcon />}
+          sx={{
+            px: 3,
+            py: 1.5,
+            background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.15) 100%)',
+            color: 'primary.main',
+            fontWeight: 600,
+            '&:hover': {
+              background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
+              color: 'white',
+              transform: 'scale(1.02)',
+            },
+            '& .MuiSvgIcon-root': {
+              transition: 'transform 0.3s ease',
+            },
+            '&:hover .MuiSvgIcon-root': {
+              transform: 'translateX(4px)',
+            },
+          }}
         >
           Ver detalhes completos
-          <ArrowForwardIcon className="text-lg group-hover/link:translate-x-1 transition-transform" />
-        </Link>
-      </div>
-    </div>
+        </Button>
+      </CardActions>
+    </Card>
   );
 }

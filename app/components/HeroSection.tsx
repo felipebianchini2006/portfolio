@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { siteConfig } from '@/lib/site.config';
+import { Typography, Button, Chip, Box, Container } from '@mui/material';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import DownloadIcon from '@mui/icons-material/Download';
 import EmailIcon from '@mui/icons-material/Email';
@@ -14,138 +15,373 @@ export function HeroSection() {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative pt-16 overflow-hidden">
-      <div className="container mx-auto px-4 py-20">
-        <div className="max-w-5xl mx-auto text-center">
+    <Box
+      component="section"
+      sx={{
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        pt: 8,
+        overflow: 'hidden',
+      }}
+    >
+      <Container maxWidth="lg" sx={{ py: 10 }}>
+        <Box sx={{ maxWidth: '1200px', mx: 'auto', textAlign: 'center' }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-8"
           >
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.5 }}
-              className="inline-block mb-6"
+              style={{ display: 'inline-block', marginBottom: 32 }}
             >
-              <div
-                className="px-6 py-3 bg-primary/10 backdrop-blur-sm rounded-full [box-shadow:var(--elevation-2)]"
-              >
-                <span className="text-primary font-semibold text-sm md:text-base">
-                  👋 Bem-vindo ao meu Portfolio
-                </span>
-              </div>
+              <Chip
+                label="👋 Bem-vindo ao meu Portfolio"
+                sx={{
+                  px: 2,
+                  py: 3,
+                  fontSize: { xs: '0.875rem', md: '1rem' },
+                  fontWeight: 600,
+                  backgroundColor: 'primary.main',
+                  color: 'white',
+                  backdropFilter: 'blur(10px)',
+                  boxShadow: 2,
+                  '&:hover': {
+                    backgroundColor: 'primary.dark',
+                    transform: 'scale(1.05)',
+                  },
+                  transition: 'all 0.3s ease',
+                }}
+              />
             </motion.div>
 
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold text-foreground mb-6 leading-tight">
+            <Typography
+              variant="h1"
+              sx={{
+                fontSize: { xs: '3rem', md: '4.5rem', lg: '6rem' },
+                fontWeight: 800,
+                color: 'text.primary',
+                mb: 4,
+                lineHeight: 1.1,
+              }}
+            >
               Olá, eu sou <br />
-              <span className="bg-gradient-to-r from-primary via-primary-light to-purple-500 bg-clip-text text-transparent">
+              <Box
+                component="span"
+                sx={{
+                  background: 'linear-gradient(135deg, #2563eb 0%, #60a5fa 50%, #a855f7 100%)',
+                  backgroundClip: 'text',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                }}
+              >
                 Felipe Pacheco
-              </span>
-            </h1>
+              </Box>
+            </Typography>
           </motion.div>
 
-          <motion.p
-            className="text-xl md:text-3xl text-foreground font-semibold mb-6 max-w-3xl mx-auto"
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Full-Stack Developer
-          </motion.p>
+            <Typography
+              variant="h4"
+              sx={{
+                fontSize: { xs: '1.5rem', md: '2rem' },
+                fontWeight: 600,
+                color: 'text.primary',
+                mb: 3,
+              }}
+            >
+              Full-Stack Developer
+            </Typography>
+          </motion.div>
 
-          <motion.p
-            className="text-lg md:text-xl text-secondary mb-8 max-w-3xl mx-auto leading-relaxed"
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            Especializado em{' '}
-            <span className="text-primary font-bold">.NET</span>,{' '}
-            <span className="text-primary font-bold">Java</span>,{' '}
-            <span className="text-primary font-bold">React</span> e arquiteturas modernas como{' '}
-            <span className="text-primary font-bold">DDD</span>,{' '}
-            <span className="text-primary font-bold">Clean Architecture</span> e{' '}
-            <span className="text-primary font-bold">Microserviços</span>
-          </motion.p>
+            <Typography
+              variant="h6"
+              sx={{
+                fontSize: { xs: '1.125rem', md: '1.25rem' },
+                fontWeight: 400,
+                color: 'text.secondary',
+                mb: 4,
+                maxWidth: '900px',
+                mx: 'auto',
+                lineHeight: 1.8,
+              }}
+            >
+              Especializado em{' '}
+              <Box component="span" sx={{ color: 'primary.main', fontWeight: 700 }}>
+                .NET
+              </Box>
+              ,{' '}
+              <Box component="span" sx={{ color: 'primary.main', fontWeight: 700 }}>
+                Java
+              </Box>
+              ,{' '}
+              <Box component="span" sx={{ color: 'primary.main', fontWeight: 700 }}>
+                React
+              </Box>{' '}
+              e arquiteturas modernas como{' '}
+              <Box component="span" sx={{ color: 'primary.main', fontWeight: 700 }}>
+                DDD
+              </Box>
+              ,{' '}
+              <Box component="span" sx={{ color: 'primary.main', fontWeight: 700 }}>
+                Clean Architecture
+              </Box>{' '}
+              e{' '}
+              <Box component="span" sx={{ color: 'primary.main', fontWeight: 700 }}>
+                Microserviços
+              </Box>
+            </Typography>
+          </motion.div>
 
-          <motion.p
-            className="text-base md:text-lg text-secondary mb-12 max-w-2xl mx-auto"
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            📚 Estudante de Análise e Desenvolvimento de Sistemas na Fatec Jales
-          </motion.p>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: { xs: '1rem', md: '1.125rem' },
+                color: 'text.secondary',
+                mb: 8,
+                maxWidth: '700px',
+                mx: 'auto',
+              }}
+            >
+              📚 Estudante de Análise e Desenvolvimento de Sistemas na Fatec Jales
+            </Typography>
+          </motion.div>
 
           <motion.div
-            className="flex flex-wrap gap-5 justify-center mb-20"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            <button
-              onClick={scrollToProjects}
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white rounded-xl font-semibold hover:scale-105 transition-all [box-shadow:var(--elevation-4)] hover:[box-shadow:var(--elevation-8)]"
+            <Box
+              sx={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                gap: 2,
+                justifyContent: 'center',
+                mb: 12,
+              }}
             >
-              <RocketLaunchIcon className="text-xl group-hover:rotate-12 transition-transform" />
-              Ver Projetos
-            </button>
-
-            <div className="flex flex-wrap gap-4">
-              <a
-                href={siteConfig.cvPT}
-                download
-                className="group inline-flex items-center gap-2 px-6 py-4 bg-white dark:bg-accent text-foreground rounded-xl font-semibold hover:bg-primary hover:text-white transition-all [box-shadow:var(--elevation-2)] hover:[box-shadow:var(--elevation-4)]"
+              <Button
+                onClick={scrollToProjects}
+                variant="contained"
+                size="large"
+                startIcon={<RocketLaunchIcon />}
+                sx={{
+                  px: 4,
+                  py: 2,
+                  background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
+                  fontSize: '1.125rem',
+                  fontWeight: 600,
+                  '&:hover': {
+                    background: 'linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%)',
+                    transform: 'scale(1.05)',
+                  },
+                  '& .MuiSvgIcon-root': {
+                    transition: 'transform 0.3s ease',
+                  },
+                  '&:hover .MuiSvgIcon-root': {
+                    transform: 'rotate(12deg)',
+                  },
+                }}
               >
-                <DownloadIcon className="text-xl group-hover:animate-bounce" />
-                CV (PT)
-              </a>
-              <a
-                href={siteConfig.cvEN}
-                download
-                className="group inline-flex items-center gap-2 px-6 py-4 bg-white dark:bg-accent text-foreground rounded-xl font-semibold hover:bg-primary hover:text-white transition-all [box-shadow:var(--elevation-2)] hover:[box-shadow:var(--elevation-4)]"
-              >
-                <DownloadIcon className="text-xl group-hover:animate-bounce" />
-                CV (EN)
-              </a>
-            </div>
+                Ver Projetos
+              </Button>
 
-            <a
-              href="#contact"
-              className="group inline-flex items-center gap-2 px-8 py-4 bg-transparent text-primary rounded-xl font-semibold hover:bg-primary hover:text-white transition-all [box-shadow:var(--elevation-2)] hover:[box-shadow:var(--elevation-4)]"
-            >
-              <EmailIcon className="text-xl group-hover:scale-110 transition-transform" />
-              Contato
-            </a>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
+                <Button
+                  component="a"
+                  href={siteConfig.cvPT}
+                  download
+                  variant="outlined"
+                  size="large"
+                  startIcon={<DownloadIcon />}
+                  sx={{
+                    px: 3,
+                    py: 2,
+                    fontSize: '1rem',
+                    fontWeight: 600,
+                    borderWidth: 2,
+                    '&:hover': {
+                      borderWidth: 2,
+                      backgroundColor: 'primary.main',
+                      color: 'white',
+                    },
+                    '& .MuiSvgIcon-root': {
+                      transition: 'transform 0.3s ease',
+                    },
+                    '&:hover .MuiSvgIcon-root': {
+                      animation: 'bounce 1s infinite',
+                    },
+                  }}
+                >
+                  CV (PT)
+                </Button>
+                <Button
+                  component="a"
+                  href={siteConfig.cvEN}
+                  download
+                  variant="outlined"
+                  size="large"
+                  startIcon={<DownloadIcon />}
+                  sx={{
+                    px: 3,
+                    py: 2,
+                    fontSize: '1rem',
+                    fontWeight: 600,
+                    borderWidth: 2,
+                    '&:hover': {
+                      borderWidth: 2,
+                      backgroundColor: 'primary.main',
+                      color: 'white',
+                    },
+                    '& .MuiSvgIcon-root': {
+                      transition: 'transform 0.3s ease',
+                    },
+                    '&:hover .MuiSvgIcon-root': {
+                      animation: 'bounce 1s infinite',
+                    },
+                  }}
+                >
+                  CV (EN)
+                </Button>
+              </Box>
+
+              <Button
+                component="a"
+                href="#contact"
+                variant="outlined"
+                size="large"
+                startIcon={<EmailIcon />}
+                sx={{
+                  px: 4,
+                  py: 2,
+                  fontSize: '1rem',
+                  fontWeight: 600,
+                  borderWidth: 2,
+                  '&:hover': {
+                    borderWidth: 2,
+                    backgroundColor: 'primary.main',
+                    color: 'white',
+                  },
+                  '& .MuiSvgIcon-root': {
+                    transition: 'transform 0.3s ease',
+                  },
+                  '&:hover .MuiSvgIcon-root': {
+                    transform: 'scale(1.1)',
+                  },
+                }}
+              >
+                Contato
+              </Button>
+            </Box>
           </motion.div>
 
           {/* Scroll Indicator */}
-          <motion.button
-            onClick={scrollToProjects}
-            className="inline-flex flex-col items-center gap-2 text-secondary hover:text-primary transition-colors cursor-pointer"
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
-            <span className="text-sm font-semibold uppercase tracking-wide">Descubra mais</span>
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            <Button
+              onClick={scrollToProjects}
+              sx={{
+                display: 'inline-flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: 1,
+                color: 'text.secondary',
+                textTransform: 'uppercase',
+                fontSize: '0.875rem',
+                fontWeight: 600,
+                letterSpacing: '0.1em',
+                '&:hover': {
+                  color: 'primary.main',
+                  backgroundColor: 'transparent',
+                },
+              }}
             >
-              <KeyboardArrowDownIcon className="text-3xl" />
-            </motion.div>
-          </motion.button>
-        </div>
-      </div>
+              <Typography variant="caption" sx={{ fontWeight: 600, letterSpacing: '0.1em' }}>
+                Descubra mais
+              </Typography>
+              <motion.div
+                animate={{ y: [0, 12, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <KeyboardArrowDownIcon sx={{ fontSize: '2rem' }} />
+              </motion.div>
+            </Button>
+          </motion.div>
+        </Box>
+      </Container>
 
       {/* Enhanced Background decoration */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-primary/20 to-purple-500/20 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-gradient-to-br from-blue-500/20 to-primary/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 to-purple-500/5 rounded-full blur-3xl" />
-      </div>
-    </section>
+      <Box
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: -1,
+          overflow: 'hidden',
+        }}
+      >
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '25%',
+            left: '25%',
+            width: 500,
+            height: 500,
+            background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%)',
+            borderRadius: '50%',
+            filter: 'blur(60px)',
+            animation: 'pulse 3s ease-in-out infinite',
+          }}
+        />
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: '25%',
+            right: '25%',
+            width: 600,
+            height: 600,
+            background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.2) 0%, rgba(37, 99, 235, 0.2) 100%)',
+            borderRadius: '50%',
+            filter: 'blur(60px)',
+            animation: 'pulse 3s ease-in-out infinite 1s',
+          }}
+        />
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 800,
+            height: 800,
+            background: 'linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(168, 85, 247, 0.05) 100%)',
+            borderRadius: '50%',
+            filter: 'blur(60px)',
+          }}
+        />
+      </Box>
+    </Box>
   );
 }
