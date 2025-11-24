@@ -9,20 +9,20 @@ export function ProjectsSection() {
   const projects = getFeaturedProjects();
 
   return (
-    <section className="py-20" id="projects">
+    <section className="py-24 bg-gradient-to-b from-accent/20 to-background" id="projects">
       <div className="container mx-auto px-4">
         <SectionTitle
           title="Projetos em Destaque"
           subtitle="Seleção dos meus melhores trabalhos e projetos desenvolvidos"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
               viewport={{ once: true }}
             >
               <ProjectCard project={project} />
