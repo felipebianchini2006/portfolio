@@ -1,4 +1,10 @@
-import { Github, Linkedin, Mail, MessageCircle } from 'lucide-react';
+'use client';
+
+import { Box, Container, IconButton, Typography } from '@mui/material';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import EmailIcon from '@mui/icons-material/Email';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import { siteConfig } from '@/lib/site.config';
 
 export function Footer() {
@@ -8,63 +14,88 @@ export function Footer() {
     {
       name: 'GitHub',
       href: siteConfig.github,
-      icon: Github,
+      icon: GitHubIcon,
       label: 'GitHub Profile',
     },
     {
       name: 'LinkedIn',
       href: siteConfig.linkedin,
-      icon: Linkedin,
+      icon: LinkedInIcon,
       label: 'LinkedIn Profile',
     },
     {
       name: 'Email',
       href: `mailto:${siteConfig.email}`,
-      icon: Mail,
+      icon: EmailIcon,
       label: 'Send Email',
     },
     {
       name: 'WhatsApp',
       href: `https://wa.me/${siteConfig.whatsapp}`,
-      icon: MessageCircle,
+      icon: WhatsAppIcon,
       label: 'WhatsApp Contact',
     },
   ];
 
   return (
-    <footer className="bg-accent mt-20 [box-shadow:var(--elevation-4)]">
-      <div className="container mx-auto px-4 py-12">
-        <div className="flex flex-col items-center gap-8">
+    <Box
+      component="footer"
+      sx={{
+        mt: 10,
+        py: 6,
+        backgroundColor: 'background.paper',
+        borderTop: '1px solid',
+        borderColor: 'divider',
+      }}
+    >
+      <Container maxWidth="lg">
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 4,
+          }}
+        >
           {/* Social Links */}
-          <div className="flex gap-5">
+          <Box sx={{ display: 'flex', gap: 2 }}>
             {socialLinks.map((link) => {
               const Icon = link.icon;
               return (
-                <a
+                <IconButton
                   key={link.name}
+                  component="a"
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 rounded-lg bg-background hover:bg-primary hover:text-white transition-all hover:scale-110 [box-shadow:var(--elevation-2)]"
                   aria-label={link.label}
+                  sx={{
+                    backgroundColor: 'action.hover',
+                    transition: 'all 0.3s ease',
+                    '&:hover': {
+                      backgroundColor: 'primary.main',
+                      color: 'white',
+                      transform: 'translateY(-4px)',
+                    },
+                  }}
                 >
-                  <Icon size={20} />
-                </a>
+                  <Icon />
+                </IconButton>
               );
             })}
-          </div>
+          </Box>
 
           {/* Copyright */}
-          <div className="text-center text-secondary text-sm">
-            <p>
+          <Box sx={{ textAlign: 'center' }}>
+            <Typography variant="body2" sx={{ color: 'text.secondary', mb: 0.5 }}>
               © {currentYear} {siteConfig.author}. Todos os direitos reservados.
-            </p>
-            <p className="mt-1">
-              Desenvolvido com Next.js, TypeScript e Tailwind CSS
-            </p>
-          </div>
-        </div>
-      </div>
-    </footer>
+            </Typography>
+            <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+              Desenvolvido com Next.js, TypeScript e Material UI
+            </Typography>
+          </Box>
+        </Box>
+      </Container>
+    </Box>
   );
 }

@@ -33,6 +33,4 @@ export interface SiteConfig {
   whatsapp: string;
   github: string;
   linkedin: string;
-  cvPT: string;
-  cvEN: string;
 }

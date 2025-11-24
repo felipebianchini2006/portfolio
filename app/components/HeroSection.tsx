@@ -1,10 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { siteConfig } from '@/lib/site.config';
 import { Typography, Button, Chip, Box, Container } from '@mui/material';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
-import DownloadIcon from '@mui/icons-material/Download';
 import EmailIcon from '@mui/icons-material/Email';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
@@ -205,65 +203,6 @@ export function HeroSection() {
               >
                 Ver Projetos
               </Button>
-
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
-                <Button
-                  component="a"
-                  href={siteConfig.cvPT}
-                  download
-                  variant="outlined"
-                  size="large"
-                  startIcon={<DownloadIcon />}
-                  sx={{
-                    px: 3,
-                    py: 2,
-                    fontSize: '1rem',
-                    fontWeight: 600,
-                    borderWidth: 2,
-                    '&:hover': {
-                      borderWidth: 2,
-                      backgroundColor: 'primary.main',
-                      color: 'white',
-                    },
-                    '& .MuiSvgIcon-root': {
-                      transition: 'transform 0.3s ease',
-                    },
-                    '&:hover .MuiSvgIcon-root': {
-                      animation: 'bounce 1s infinite',
-                    },
-                  }}
-                >
-                  CV (PT)
-                </Button>
-                <Button
-                  component="a"
-                  href={siteConfig.cvEN}
-                  download
-                  variant="outlined"
-                  size="large"
-                  startIcon={<DownloadIcon />}
-                  sx={{
-                    px: 3,
-                    py: 2,
-                    fontSize: '1rem',
-                    fontWeight: 600,
-                    borderWidth: 2,
-                    '&:hover': {
-                      borderWidth: 2,
-                      backgroundColor: 'primary.main',
-                      color: 'white',
-                    },
-                    '& .MuiSvgIcon-root': {
-                      transition: 'transform 0.3s ease',
-                    },
-                    '&:hover .MuiSvgIcon-root': {
-                      animation: 'bounce 1s infinite',
-                    },
-                  }}
-                >
-                  CV (EN)
-                </Button>
-              </Box>
 
               <Button
                 component="a"

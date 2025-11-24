@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Box, Container } from '@mui/material';
 import { SectionTitle } from './SectionTitle';
 import { ProjectCard } from './ProjectCard';
 import { getFeaturedProjects } from '@/lib/projects';
@@ -9,14 +10,32 @@ export function ProjectsSection() {
   const projects = getFeaturedProjects();
 
   return (
-    <section className="py-24 bg-gradient-to-b from-accent/20 to-background" id="projects">
-      <div className="container mx-auto px-4">
+    <Box
+      component="section"
+      id="projects"
+      sx={{
+        py: 12,
+        background: 'linear-gradient(180deg, rgba(37, 99, 235, 0.02) 0%, rgba(37, 99, 235, 0.05) 100%)',
+      }}
+    >
+      <Container maxWidth="lg">
         <SectionTitle
           title="Projetos em Destaque"
           subtitle="Seleção dos meus melhores trabalhos e projetos desenvolvidos"
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: {
+              xs: '1fr',
+              lg: 'repeat(2, 1fr)',
+            },
+            gap: 4,
+            maxWidth: '1200px',
+            mx: 'auto',
+          }}
+        >
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -28,8 +47,8 @@ export function ProjectsSection() {
               <ProjectCard project={project} />
             </motion.div>
           ))}
-        </div>
-      </div>
-    </section>
+        </Box>
+      </Container>
+    </Box>
   );
 }

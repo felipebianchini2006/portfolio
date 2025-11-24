@@ -9,6 +9,4 @@ export const siteConfig: SiteConfig = {
   whatsapp: '5517996638804',
   github: 'https://github.com/felipebianchini2006',
   linkedin: 'https://www.linkedin.com/in/felipe-pacheco-bianchini/',
-  cvPT: '/cv/felipe-bianchini-cv-pt.pdf',
-  cvEN: '/cv/felipe-bianchini-cv-en.pdf',
 };

@@ -1,3 +1,7 @@
+'use client';
+
+import { Box, Typography } from '@mui/material';
+
 interface SectionTitleProps {
   title: string;
   subtitle?: string;
@@ -6,15 +10,39 @@ interface SectionTitleProps {
 
 export function SectionTitle({ title, subtitle, align = 'center' }: SectionTitleProps) {
   return (
-    <div className={`mb-12 ${align === 'center' ? 'text-center' : 'text-left'}`}>
-      <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+    <Box
+      sx={{
+        mb: 8,
+        textAlign: align,
+      }}
+    >
+      <Typography
+        variant="h2"
+        sx={{
+          fontSize: { xs: '2rem', md: '2.5rem', lg: '3rem' },
+          fontWeight: 800,
+          color: 'text.primary',
+          mb: 2,
+          letterSpacing: '-0.02em',
+        }}
+      >
         {title}
-      </h2>
+      </Typography>
       {subtitle && (
-        <p className="text-lg text-secondary max-w-2xl mx-auto">
+        <Typography
+          variant="h6"
+          sx={{
+            fontSize: { xs: '1rem', md: '1.125rem' },
+            fontWeight: 400,
+            color: 'text.secondary',
+            maxWidth: align === 'center' ? '600px' : 'none',
+            mx: align === 'center' ? 'auto' : 0,
+            lineHeight: 1.7,
+          }}
+        >
           {subtitle}
-        </p>
+        </Typography>
       )}
-    </div>
+    </Box>
   );
 }
