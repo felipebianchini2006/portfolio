@@ -16,32 +16,24 @@ export function ContactSection() {
       label: 'Email',
       value: siteConfig.email,
       href: `mailto:${siteConfig.email}`,
-      bgGradient: 'linear-gradient(135deg, #ef4444 0%, #ec4899 100%)',
-      iconColor: '#ef4444',
     },
     {
       icon: WhatsAppIcon,
       label: 'WhatsApp',
       value: siteConfig.phone,
       href: `https://wa.me/${siteConfig.whatsapp}`,
-      bgGradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-      iconColor: '#10b981',
     },
     {
       icon: GitHubIcon,
       label: 'GitHub',
       value: '@felipebianchini2006',
       href: siteConfig.github,
-      bgGradient: 'linear-gradient(135deg, #374151 0%, #111827 100%)',
-      iconColor: '#374151',
     },
     {
       icon: LinkedInIcon,
       label: 'LinkedIn',
       value: 'Felipe Pacheco Bianchini',
       href: siteConfig.linkedin,
-      bgGradient: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)',
-      iconColor: '#2563eb',
     },
   ];
 
@@ -78,8 +70,9 @@ export function ContactSection() {
             return (
               <motion.div
                 key={method.label}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -8 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
@@ -93,43 +86,14 @@ export function ContactSection() {
                     position: 'relative',
                     borderRadius: 4,
                     overflow: 'hidden',
-                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                     textDecoration: 'none',
                     height: '100%',
+                    transition: 'box-shadow 0.3s ease',
                     '&:hover': {
-                      transform: 'translateY(-12px)',
-                      boxShadow: 16,
-                      '& .hover-bg': {
-                        opacity: 1,
-                      },
-                      '& .icon-box': {
-                        backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                      },
-                      '& .MuiSvgIcon-root': {
-                        color: 'white',
-                      },
-                      '& .MuiTypography-root': {
-                        color: 'white',
-                      },
-                      '& .value-text': {
-                        color: 'rgba(255, 255, 255, 0.9)',
-                      },
+                      boxShadow: 8,
                     },
                   }}
                 >
-                  {/* Hover gradient background */}
-                  <Box
-                    className="hover-bg"
-                    sx={{
-                      position: 'absolute',
-                      inset: 0,
-                      background: method.bgGradient,
-                      opacity: 0,
-                      transition: 'opacity 0.3s ease',
-                      zIndex: 0,
-                    }}
-                  />
-
                   {/* Content */}
                   <CardContent
                     sx={{
@@ -149,15 +113,13 @@ export function ContactSection() {
                         p: 2.5,
                         borderRadius: 3,
                         backgroundColor: 'action.hover',
-                        transition: 'all 0.3s ease',
                         boxShadow: 3,
                       }}
                     >
                       <Icon
                         sx={{
                           fontSize: '3rem',
-                          color: method.iconColor,
-                          transition: 'color 0.3s ease',
+                          color: 'primary.main',
                         }}
                       />
                     </Box>
@@ -168,7 +130,6 @@ export function ContactSection() {
                           fontWeight: 700,
                           color: 'text.primary',
                           mb: 1,
-                          transition: 'color 0.3s ease',
                         }}
                       >
                         {method.label}
@@ -180,7 +141,6 @@ export function ContactSection() {
                           color: 'text.secondary',
                           fontWeight: 500,
                           wordBreak: 'break-all',
-                          transition: 'color 0.3s ease',
                         }}
                       >
                         {method.value}

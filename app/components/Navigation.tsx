@@ -41,9 +41,8 @@ export function Navigation() {
   ];
 
   const isActive = (href: string) => {
-    if (href === '/') return pathname === '/';
-    if (href.startsWith('/#')) return pathname === '/';
-    return pathname === href;
+    // Não destacar nenhum link como ativo na navegação
+    return false;
   };
 
   const toggleDrawer = (open: boolean) => () => {

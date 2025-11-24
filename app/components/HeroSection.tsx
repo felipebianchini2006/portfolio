@@ -78,7 +78,7 @@ export function HeroSection() {
                   WebkitTextFillColor: 'transparent',
                 }}
               >
-                Felipe Pacheco
+                Felipe Bianchini
               </Box>
             </Typography>
           </motion.div>

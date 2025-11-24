@@ -22,26 +22,26 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <Card
-      elevation={2}
+    <Box
       sx={{
         position: 'relative',
         borderRadius: 4,
-        overflow: 'visible',
+        padding: '3px',
+        background: 'linear-gradient(135deg, #2563eb 0%, #60a5fa 50%, #a855f7 100%)',
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         '&:hover': {
           transform: 'translateY(-12px)',
-          boxShadow: 16,
+          boxShadow: '0 20px 40px rgba(37, 99, 235, 0.3)',
         },
       }}
     >
-      {/* Top accent bar */}
-      <Box
+      <Card
+        elevation={0}
         sx={{
-          height: 8,
-          background: 'linear-gradient(90deg, #2563eb 0%, #60a5fa 50%, #a855f7 100%)',
+          borderRadius: 3.5,
+          overflow: 'hidden',
         }}
-      />
+      >
 
       <CardContent sx={{ p: 4 }}>
         {/* Header */}
@@ -188,5 +188,6 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </Button>
       </CardActions>
     </Card>
+    </Box>
   );
 }
