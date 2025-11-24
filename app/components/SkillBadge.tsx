@@ -42,11 +42,12 @@ export function SkillBadge({ name, years, variant = 'primary', category }: Skill
   return (
     <div
       className={`
-        group inline-flex items-center gap-2.5 px-5 py-3 rounded-xl font-medium text-sm md:text-base
+        group inline-flex items-center gap-3 px-6 py-3.5 rounded-xl font-medium text-sm md:text-base
         transition-all duration-300 hover:scale-110 hover:-translate-y-1 cursor-default
+        [box-shadow:var(--elevation-2)] hover:[box-shadow:var(--elevation-8)]
         ${variant === 'primary'
-          ? 'bg-gradient-to-r from-primary/15 to-primary/10 text-primary border-2 border-primary/30 hover:border-primary hover:shadow-lg hover:shadow-primary/20'
-          : 'bg-white dark:bg-accent text-foreground border-2 border-border hover:border-primary/50 hover:shadow-lg'
+          ? 'bg-gradient-to-r from-primary/15 to-primary/10 text-primary hover:shadow-primary/20'
+          : 'bg-white dark:bg-accent text-foreground'
         }
       `}
     >
@@ -55,7 +56,7 @@ export function SkillBadge({ name, years, variant = 'primary', category }: Skill
       </span>
       <span className="font-semibold">{name}</span>
       {years && (
-        <span className="text-xs font-medium text-secondary bg-background/50 px-2 py-1 rounded-full">
+        <span className="text-xs font-medium text-secondary bg-background/50 px-2.5 py-1 rounded-full">
           {years}
         </span>
       )}

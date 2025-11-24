@@ -29,7 +29,9 @@ export function HeroSection() {
               transition={{ duration: 0.5 }}
               className="inline-block mb-6"
             >
-              <div className="px-6 py-3 bg-primary/10 backdrop-blur-sm rounded-full border border-primary/20">
+              <div
+                className="px-6 py-3 bg-primary/10 backdrop-blur-sm rounded-full [box-shadow:var(--elevation-2)]"
+              >
                 <span className="text-primary font-semibold text-sm md:text-base">
                   👋 Bem-vindo ao meu Portfolio
                 </span>
@@ -78,24 +80,24 @@ export function HeroSection() {
           </motion.p>
 
           <motion.div
-            className="flex flex-wrap gap-4 justify-center mb-20"
+            className="flex flex-wrap gap-5 justify-center mb-20"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
             <button
               onClick={scrollToProjects}
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white rounded-xl font-semibold hover:scale-105 transition-all shadow-lg hover:shadow-2xl"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-primary to-primary-dark text-white rounded-xl font-semibold hover:scale-105 transition-all [box-shadow:var(--elevation-4)] hover:[box-shadow:var(--elevation-8)]"
             >
               <RocketLaunchIcon className="text-xl group-hover:rotate-12 transition-transform" />
               Ver Projetos
             </button>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-4">
               <a
                 href={siteConfig.cvPT}
                 download
-                className="group inline-flex items-center gap-2 px-6 py-4 bg-white dark:bg-accent text-foreground rounded-xl font-semibold hover:bg-primary hover:text-white transition-all border-2 border-border hover:border-primary shadow-md hover:shadow-lg"
+                className="group inline-flex items-center gap-2 px-6 py-4 bg-white dark:bg-accent text-foreground rounded-xl font-semibold hover:bg-primary hover:text-white transition-all [box-shadow:var(--elevation-2)] hover:[box-shadow:var(--elevation-4)]"
               >
                 <DownloadIcon className="text-xl group-hover:animate-bounce" />
                 CV (PT)
@@ -103,7 +105,7 @@ export function HeroSection() {
               <a
                 href={siteConfig.cvEN}
                 download
-                className="group inline-flex items-center gap-2 px-6 py-4 bg-white dark:bg-accent text-foreground rounded-xl font-semibold hover:bg-primary hover:text-white transition-all border-2 border-border hover:border-primary shadow-md hover:shadow-lg"
+                className="group inline-flex items-center gap-2 px-6 py-4 bg-white dark:bg-accent text-foreground rounded-xl font-semibold hover:bg-primary hover:text-white transition-all [box-shadow:var(--elevation-2)] hover:[box-shadow:var(--elevation-4)]"
               >
                 <DownloadIcon className="text-xl group-hover:animate-bounce" />
                 CV (EN)
@@ -112,7 +114,7 @@ export function HeroSection() {
 
             <a
               href="#contact"
-              className="group inline-flex items-center gap-2 px-8 py-4 bg-transparent text-primary rounded-xl font-semibold hover:bg-primary hover:text-white transition-all border-2 border-primary shadow-md hover:shadow-lg"
+              className="group inline-flex items-center gap-2 px-8 py-4 bg-transparent text-primary rounded-xl font-semibold hover:bg-primary hover:text-white transition-all [box-shadow:var(--elevation-2)] hover:[box-shadow:var(--elevation-4)]"
             >
               <EmailIcon className="text-xl group-hover:scale-110 transition-transform" />
               Contato

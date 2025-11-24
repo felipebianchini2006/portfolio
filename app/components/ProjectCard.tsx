@@ -12,7 +12,9 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <div className="group relative bg-white dark:bg-accent rounded-2xl border-2 border-border overflow-hidden hover:border-primary/50 hover:shadow-2xl transition-all duration-300 hover:-translate-y-3">
+    <div
+      className="group relative bg-white dark:bg-accent rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-3 [box-shadow:var(--elevation-2)] hover:[box-shadow:var(--elevation-16)]"
+    >
       {/* Top accent bar */}
       <div className="h-2 bg-gradient-to-r from-primary via-primary-light to-purple-500" />
 
@@ -27,12 +29,13 @@ export function ProjectCard({ project }: ProjectCardProps) {
               {project.title}
             </h3>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-xl bg-background hover:bg-primary hover:text-white transition-all hover:scale-110 shadow-sm"
+              className="p-2.5 rounded-xl bg-background hover:bg-primary hover:text-white transition-all hover:scale-110"
+              style={{ boxShadow: 'var(--elevation-2)' }}
               aria-label="View on GitHub"
             >
               <GitHubIcon className="text-xl" />
@@ -42,7 +45,8 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 href={project.demo}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 rounded-xl bg-background hover:bg-primary hover:text-white transition-all hover:scale-110 shadow-sm"
+                className="p-2.5 rounded-xl bg-background hover:bg-primary hover:text-white transition-all hover:scale-110"
+                style={{ boxShadow: 'var(--elevation-2)' }}
                 aria-label="View demo"
               >
                 <OpenInNewIcon className="text-xl" />
@@ -52,17 +56,17 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         {/* Description */}
-        <p className="text-secondary text-base leading-relaxed mb-6 min-h-[3rem]">
+        <p className="text-secondary text-base leading-relaxed mb-8 min-h-[3rem]">
           {project.description}
         </p>
 
         {/* Technologies */}
-        <div className="flex flex-wrap gap-2 mb-6">
+        <div className="flex flex-wrap gap-3 mb-6">
           {project.technologies.slice(0, 4).map((tech) => (
             <SkillBadge key={tech} name={tech} variant="secondary" />
           ))}
           {project.technologies.length > 4 && (
-            <span className="text-xs font-medium text-secondary bg-accent px-3 py-1.5 rounded-full border border-border">
+            <span className="text-xs font-medium text-secondary bg-accent px-3 py-1.5 rounded-full" style={{ boxShadow: 'var(--elevation-1)' }}>
               +{project.technologies.length - 4} mais
             </span>
           )}
@@ -71,7 +75,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         {/* Call to action */}
         <Link
           href={`/projects/${project.slug}`}
-          className="group/link inline-flex items-center gap-2 px-6 py-3 bg-primary/10 text-primary rounded-xl font-semibold hover:bg-primary hover:text-white transition-all border-2 border-primary/20 hover:border-primary"
+          className="group/link inline-flex items-center gap-2 px-6 py-3 bg-primary/10 text-primary rounded-xl font-semibold hover:bg-primary hover:text-white transition-all [box-shadow:var(--elevation-2)] hover:[box-shadow:var(--elevation-4)]"
         >
           Ver detalhes completos
           <ArrowForwardIcon className="text-lg group-hover/link:translate-x-1 transition-transform" />

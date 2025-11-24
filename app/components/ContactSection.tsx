@@ -65,14 +65,16 @@ export function ContactSection() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="group relative bg-white dark:bg-accent rounded-2xl p-8 border-2 border-border hover:border-transparent shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-3"
+                className="group relative bg-white dark:bg-accent rounded-2xl p-8 transition-all duration-300 hover:-translate-y-3 [box-shadow:var(--elevation-2)] hover:[box-shadow:var(--elevation-16)]"
               >
                 {/* Hover gradient background */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${method.bgColor} opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl`} />
 
                 {/* Content */}
-                <div className="relative flex flex-col items-center text-center gap-5">
-                  <div className="p-5 rounded-2xl bg-accent group-hover:bg-white/20 transition-all duration-300 shadow-md">
+                <div className="relative flex flex-col items-center text-center gap-6">
+                  <div
+                    className="p-5 rounded-2xl bg-accent group-hover:bg-white/20 transition-all duration-300 [box-shadow:var(--elevation-4)]"
+                  >
                     <Icon className={`text-5xl ${method.iconColor} group-hover:text-white transition-colors`} />
                   </div>
                   <div>
@@ -96,7 +98,9 @@ export function ContactSection() {
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <div className="max-w-3xl mx-auto bg-white dark:bg-accent rounded-2xl p-8 border-2 border-border shadow-lg">
+          <div
+            className="max-w-3xl mx-auto bg-white dark:bg-accent rounded-2xl p-8 [box-shadow:var(--elevation-2)]"
+          >
             <p className="text-lg text-foreground leading-relaxed mb-4">
               <span className="font-bold text-primary">Estou sempre aberto</span> a discutir novos projetos,
               ideias criativas ou oportunidades para fazer parte da sua visão.

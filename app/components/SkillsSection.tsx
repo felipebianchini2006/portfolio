@@ -65,17 +65,19 @@ export function SkillsSection() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: categoryIndex * 0.1 }}
               viewport={{ once: true }}
-              className="group bg-white dark:bg-accent rounded-2xl p-8 border-2 border-border hover:border-primary/50 shadow-lg hover:shadow-2xl transition-all duration-300"
+              className="group bg-white dark:bg-accent rounded-2xl p-8 transition-all duration-300 [box-shadow:var(--elevation-2)] hover:[box-shadow:var(--elevation-8)]"
             >
               <div className="flex items-center gap-4 mb-6">
-                <div className={`p-3 rounded-xl bg-gradient-to-br ${category.color} text-white shadow-md group-hover:scale-110 transition-transform`}>
+                <div
+                  className={`p-3 rounded-xl bg-gradient-to-br ${category.color} text-white group-hover:scale-110 transition-transform [box-shadow:var(--elevation-4)]`}
+                >
                   {category.icon}
                 </div>
                 <h3 className="text-2xl font-bold text-foreground">
                   {category.title}
                 </h3>
               </div>
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-4">
                 {category.skills.map((skill) => (
                   <SkillBadge
                     key={skill.name}

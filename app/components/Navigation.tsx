@@ -45,9 +45,12 @@ export function Navigation() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/90 dark:bg-background/90 backdrop-blur-xl shadow-xl border-b-2 border-primary/20'
+          ? 'bg-white/90 dark:bg-background/90 backdrop-blur-xl'
           : 'bg-transparent'
       }`}
+      style={{
+        boxShadow: isScrolled ? 'var(--elevation-4)' : 'none',
+      }}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
@@ -66,16 +69,19 @@ export function Navigation() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-4">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative px-5 py-2.5 font-semibold rounded-xl transition-all ${
+                className={`relative px-6 py-3 font-semibold rounded-xl transition-all ${
                   isActive(link.href)
-                    ? 'text-white bg-gradient-to-r from-primary to-primary-dark shadow-lg'
+                    ? 'text-white bg-gradient-to-r from-primary to-primary-dark'
                     : 'text-foreground hover:bg-accent hover:text-primary'
                 }`}
+                style={{
+                  boxShadow: isActive(link.href) ? 'var(--elevation-4)' : 'none',
+                }}
               >
                 {link.label}
                 {isActive(link.href) && (
@@ -88,7 +94,8 @@ export function Navigation() {
             {mounted && (
               <button
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                className="ml-4 p-3 rounded-xl bg-accent hover:bg-primary hover:text-white transition-all hover:scale-110 shadow-md border-2 border-border hover:border-primary"
+                className="ml-4 p-3 rounded-xl bg-accent hover:bg-primary hover:text-white transition-all hover:scale-110"
+                style={{ boxShadow: 'var(--elevation-2)' }}
                 aria-label="Toggle theme"
               >
                 {theme === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
@@ -101,7 +108,8 @@ export function Navigation() {
             {mounted && (
               <button
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                className="p-2.5 rounded-xl bg-accent hover:bg-primary hover:text-white transition-all shadow-md"
+                className="p-2.5 rounded-xl bg-accent hover:bg-primary hover:text-white transition-all"
+                style={{ boxShadow: 'var(--elevation-2)' }}
                 aria-label="Toggle theme"
               >
                 {theme === 'dark' ? <LightModeIcon /> : <DarkModeIcon />}
@@ -109,7 +117,8 @@ export function Navigation() {
             )}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2.5 rounded-xl bg-accent hover:bg-primary hover:text-white transition-all shadow-md"
+              className="p-2.5 rounded-xl bg-accent hover:bg-primary hover:text-white transition-all"
+              style={{ boxShadow: 'var(--elevation-2)' }}
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <CloseIcon className="text-2xl" /> : <MenuIcon className="text-2xl" />}
@@ -119,18 +128,21 @@ export function Navigation() {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t-2 border-border bg-white/95 dark:bg-background/95 backdrop-blur-xl shadow-xl">
-            <div className="flex flex-col py-6 gap-3">
+          <div className="md:hidden bg-white/95 dark:bg-background/95 backdrop-blur-xl" style={{ boxShadow: 'var(--elevation-8)' }}>
+            <div className="flex flex-col py-6 gap-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className={`font-semibold px-6 py-3 rounded-xl transition-all ${
+                  className={`font-semibold px-6 py-3.5 rounded-xl transition-all ${
                     isActive(link.href)
-                      ? 'text-white bg-gradient-to-r from-primary to-primary-dark shadow-lg'
+                      ? 'text-white bg-gradient-to-r from-primary to-primary-dark'
                       : 'text-foreground hover:bg-accent hover:text-primary'
                   }`}
+                  style={{
+                    boxShadow: isActive(link.href) ? 'var(--elevation-4)' : 'none',
+                  }}
                 >
                   {link.label}
                 </Link>

@@ -32,11 +32,11 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-accent border-t border-border mt-20">
+    <footer className="bg-accent mt-20 [box-shadow:var(--elevation-4)]">
       <div className="container mx-auto px-4 py-12">
-        <div className="flex flex-col items-center gap-6">
+        <div className="flex flex-col items-center gap-8">
           {/* Social Links */}
-          <div className="flex gap-4">
+          <div className="flex gap-5">
             {socialLinks.map((link) => {
               const Icon = link.icon;
               return (
@@ -45,7 +45,7 @@ export function Footer() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 rounded-lg bg-background hover:bg-primary hover:text-white transition-all hover:scale-110"
+                  className="p-3 rounded-lg bg-background hover:bg-primary hover:text-white transition-all hover:scale-110 [box-shadow:var(--elevation-2)]"
                   aria-label={link.label}
                 >
                   <Icon size={20} />
