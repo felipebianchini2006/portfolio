@@ -74,7 +74,7 @@ export default function AboutPage() {
                 <Box component="span" sx={{ color: 'primary.main', fontWeight: 700 }}>
                   Felipe Pacheco Bianchini
                 </Box>
-                , um desenvolvedor Full-Stack apaixonado por criar soluções tecnológicas que fazem a diferença.
+                , engenheiro de software Full Stack, com foco no desenvolvimento de soluções tecnológicas eficientes, escaláveis e orientadas a resultados.
               </Typography>
               
               <Typography
@@ -86,11 +86,7 @@ export default function AboutPage() {
                   fontSize: { xs: '1rem', md: '1.125rem' },
                 }}
               >
-                Atualmente cursando{' '}
-                <Box component="span" sx={{ color: 'primary.main', fontWeight: 600 }}>
-                  Análise e Desenvolvimento de Sistemas na Fatec Jales
-                </Box>
-                , com previsão de conclusão em 2026, somando 4 anos de experiência prática em desenvolvimento de software.
+                Atualmente curso Análise e Desenvolvimento de Sistemas na Fatec Jales, com previsão de conclusão em 2026, e acumulo aproximadamente quatro anos de experiência prática em desenvolvimento de software.
               </Typography>
               
               <Typography
@@ -101,9 +97,7 @@ export default function AboutPage() {
                   fontSize: { xs: '1rem', md: '1.125rem' },
                 }}
               >
-                Minha jornada começou com o ensino técnico em Análise e Desenvolvimento de Sistemas,
-                onde desenvolvi uma base sólida em programação e estruturas de dados. Desde então,
-                venho aprimorando minhas habilidades em diversas tecnologias e arquiteturas modernas.
+                Minha trajetória teve início no ensino técnico em Análise e Desenvolvimento de Sistemas, período em que consolidei uma base sólida em lógica de programação, estruturas de dados e boas práticas de desenvolvimento. Desde então, venho evoluindo continuamente minhas competências, atuando com diferentes tecnologias, frameworks e arquiteturas modernas, sempre buscando qualidade, performance e manutenibilidade nas soluções entregues.
               </Typography>
             </Box>
           </Box>

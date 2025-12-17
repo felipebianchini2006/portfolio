@@ -160,7 +160,7 @@ export function HeroSection() {
                 mx: 'auto',
               }}
             >
-              📚 Estudante de Análise e Desenvolvimento de Sistemas na Fatec Jales
+              Engenheiro de Software
             </Typography>
           </motion.div>
 
