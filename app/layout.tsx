@@ -6,6 +6,7 @@ import { MuiProvider } from "./components/MuiThemeProvider";
 import { Navigation } from "./components/Navigation";
 import { Footer } from "./components/Footer";
 import { siteConfig } from "@/lib/site.config";
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -58,11 +59,13 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ThemeProvider>
-          <MuiProvider>
-            <Navigation />
-            <main>{children}</main>
-            <Footer />
-          </MuiProvider>
+          <AppRouterCacheProvider options={{ key: "mui" }}>
+            <MuiProvider>
+              <Navigation />
+              <main>{children}</main>
+              <Footer />
+            </MuiProvider>
+          </AppRouterCacheProvider>
         </ThemeProvider>
       </body>
     </html>

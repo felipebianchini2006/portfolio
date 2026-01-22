@@ -20,6 +20,7 @@ export const skills: Skill[] = [
   { name: 'GitHub', category: 'backend', years: '5 anos' },
   { name: 'AWS', category: 'backend', years: '1 ano' },
   { name: 'Azure DevOps', category: 'backend', years: '1 ano' },
+  { name: 'NestJS', category: 'backend', years: '1 ano' },
 
   // Secondary Technologies
   { name: 'Ruby', category: 'secondary', years: '3 meses' },
